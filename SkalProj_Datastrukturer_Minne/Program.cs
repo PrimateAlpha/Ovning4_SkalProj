@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace SkalProj_Datastrukturer_Minne
 {
@@ -14,7 +15,7 @@ namespace SkalProj_Datastrukturer_Minne
             while (true)
             {
                 Console.WriteLine("Please navigate through the menu by inputting the number \n(1, 2, 3 ,4, 0) of your choice"
-                    + "\n1. Examine a List"
+                    + "\n1. Examine a List (capital Q back to menu)"
                     + "\n2. Examine a Queue"
                     + "\n3. Examine a Stack"
                     + "\n4. CheckParanthesis"
@@ -71,11 +72,43 @@ namespace SkalProj_Datastrukturer_Minne
              * As a default case, tell them to use only + or -
              * Below you can see some inspirational code to begin working.
             */
+            List<string> theList = new List<string>();
+                bool success = true;
+            do
+            {
+                Console.WriteLine("Type +Name to add to the list, -Name to remove a name: ");
+                string input = Console.ReadLine();
+                if (!string.IsNullOrWhiteSpace(input))
+                {
+                    char nav = input[0];
+                    string value = input.Substring(1);
 
-            //List<string> theList = new List<string>();
-            //string input = Console.ReadLine();
-            //char nav = input[0];
-            //string value = input.substring(1);
+                    switch (nav)
+                    {
+                        case '+':
+                            theList.Add(value);
+                            Console.WriteLine($"Current # of items: {theList.Count} Capacity:  {theList.Capacity}");
+                            break;
+                        case '-':
+                            theList.Remove(value);
+                            Console.WriteLine($"Current # of items: {theList.Count} Capacity:  {theList.Capacity}");
+                            break;
+                        case 'Q':
+                            success = false;
+                            break;
+                        default:
+                            Console.WriteLine("Please type a name in accordance with the syntax below!");
+                            break;
+                    }
+
+                }
+                else
+                {
+                   // Conosle.WritLine()
+                }
+
+            } while (success);
+
 
             //switch(nav){...}
         }
@@ -83,13 +116,52 @@ namespace SkalProj_Datastrukturer_Minne
         /// <summary>
         /// Examines the datastructure Queue
         /// </summary>
-        static void ExamineQueue()
+        static void ExamineQueue() //FIFO datastructure.
         {
             /*
              * Loop this method untill the user inputs something to exit to main menue.
              * Create a switch with cases to enqueue items or dequeue items
              * Make sure to look at the queue after Enqueueing and Dequeueing to see how it behaves
             */
+
+            Queue<string> queueIca = new Queue<string>();
+            bool success = true;
+
+            do
+            {
+                Console.WriteLine("Type +Name to add to the list, - to remove a name: ");
+                string input = Console.ReadLine();
+                if (!string.IsNullOrWhiteSpace(input))
+                {
+                    char nav = input[0];
+                    string value = input.Substring(1);
+
+                    switch (nav)
+                    {
+                        case '+':
+                            queueIca.Enqueue(value);
+                            Console.WriteLine($"Current # of items: {queueIca.Count}");
+                            break;
+                        case '-':
+                            queueIca.Dequeue();
+                            Console.WriteLine($"Current # of items: {queueIca.Count}");
+                            break;
+                        case 'Q':
+                            success = false;
+                            break;
+                        default:
+                            Console.WriteLine("Please type a name in accordance with the syntax below!");
+                            break;
+                    }
+
+                }
+                else
+                {
+                    // Conosle.WritLine()
+                }
+
+            } while (success);
+
         }
 
         /// <summary>
@@ -102,6 +174,60 @@ namespace SkalProj_Datastrukturer_Minne
              * Create a switch with cases to push or pop items
              * Make sure to look at the stack after pushing and and poping to see how it behaves
             */
+
+            Stack<string> stack = new Stack<string>();
+            bool success = true;
+
+            do
+            {
+                Console.WriteLine("\nType +Name to add to the list, - to remove a name: ");
+                string input = Console.ReadLine();
+                if (!string.IsNullOrWhiteSpace(input))
+                {
+                    char nav = input[0];
+                    string value = input.Substring(1);
+
+                    switch (nav)
+                    {
+                        case '+':
+                            stack.Push(value);
+                            Console.WriteLine($"Current # of items: {stack.Peek}");
+                            break;
+                        case '-':
+                            stack.Pop();
+                            Console.WriteLine($"Current # of items: {stack.Peek}");
+                            break;
+                        case 'P':
+                            foreach (string item in stack)
+                            {
+                                char[] charray = item.ToCharArray();
+                                var reverse = charray.Reverse();
+                                foreach (var r in reverse)
+                                {
+                                    Console.Write(r);
+                                }
+                                Console.Write("\n");
+                                
+                            }
+                            break;
+                        //Console.WriteLine($"Input in reverse: {stack.}");
+
+                        case 'Q':
+                            success = false;
+                            break;
+                        default:
+                            Console.WriteLine("Please type a name in accordance with the syntax below!");
+                            break;
+                    }
+
+                }
+                else
+                {
+                    // Conosle.WritLine()
+                }
+
+            } while (success);
+
         }
 
         static void CheckParanthesis()
